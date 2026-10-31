@@ -1,5 +1,5 @@
 streamlit>=1.40.0
-google-genai
 groq==0.31.0
 pandas==2.2.3
 numpy==1.26.4
+google-genai
