@@ -1220,18 +1220,26 @@ if prompt:
 
                 placeholder.markdown(response_text)
 
-            except Exception:
-                # Não exibe detalhes internos, chave ou dados da requisição.
+           
+            except Exception as e:
+                # Registra o erro técnico sem expor a chave da API.
+                logger.exception(
+                    "ERRO GEMINI | Modelo: %s | Tipo: %s",
+                    st.session_state.selected_model,
+                    type(e).__name__
+                )
+
                 response_text = (
                     "Não foi possível concluir a resposta da LaryMB. "
-                    "Verifique sua conexão, a configuração da API Gemini, "
-                    "a disponibilidade do modelo e os limites da sua conta. "
-                    "Se o problema persistir, consulte o terminal para "
-                    "investigar o erro técnico."
+                    "Ocorreu um erro na comunicação com o Gemini. "
+                    "Consulte os Logs do Streamlit Cloud para identificar "
+                    "a causa e tente novamente."
                 )
+
                 placeholder.error(response_text)
 
         # Registra a resposta para manter o contexto da conversa.
         st.session_state.messages.append(
             {"role": "assistant", "content": response_text}
         )
+
