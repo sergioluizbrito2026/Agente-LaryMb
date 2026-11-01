@@ -1,3 +1,7 @@
+import logging
+
+logger = logging.getLogger("larymb")
+
 import streamlit as st
 import os
 from pathlib import Path
